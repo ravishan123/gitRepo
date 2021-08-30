@@ -9,7 +9,7 @@ export const homeObjOne = {
   description: 
   
   'Million of open source projects on GitHub are written in 337 programming languages, of which JavaScript is most popular. There are over 2.3 open source projects written in JavaScript and 1 million in Python.',
-  buttonLabel: 'Lets Go',
+  buttonLabel: 'Say Hello to octo-cat',
   imgStart: '',
   img: require('../../images/svg-1.svg'),
   alt: 'Credit Card',

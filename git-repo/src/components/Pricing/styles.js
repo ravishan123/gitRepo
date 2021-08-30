@@ -10,6 +10,7 @@ export default makeStyles ({
     display: 'flex',
      flexDirection: 'column',
       textAlign: 'center',
+      padding: '10%',
   },
   card: {
     display: 'flex',

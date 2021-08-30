@@ -5,13 +5,22 @@ import { fetchRepo } from '../../actions/repos';
 import { useSelector } from 'react-redux';
 import {
   BrowserRouter as Router,
+  Link,
   useParams} from "react-router-dom";
 import {Section,Heading}from '../Details/Detail.elements';
 
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {Card,CardContent,CardMedia,Typography,Button,Avatar} from '@material-ui/core/';
-// import {SkipPreviousIcon,SkipNextIcon,PlayArrowIcon} from '@material-ui/icons/';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  Avatar,
+
+} from '@material-ui/core/';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,9 +56,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '100%',
     objectFit: 'cover'
   },
-  h5:{
-
-  }
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
 }));
 
 
@@ -58,17 +72,41 @@ function Details() {
 
   const classes = useStyles();
   const theme = useTheme();
+  const counter = useSelector(state => state.counter);
+
+
+
+//form
+const [open, setOpen] = React.useState(false);
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(Number(event.target.value) || '');
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+
 
 
 
   let { id } = useParams();
   console.log("id no", id)
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   
+
   const details = useSelector((state) => state.repo.repo.items.filter(x => x.id === parseInt(id))[0])
   console.log("no no", details)
 
+  
 
  useEffect(() => {
     console.log("awdw")
@@ -83,21 +121,13 @@ function Details() {
   return (
 
 
-  
-//     <div > 
-// {/*     
-//     <p>{details.full_name}</p>
-//     <p>{details.forks}</p>
-//     <p>{details.description}</p>
-//     <p>{details.description}</p>
-//      */}
-    
-    
-//     </div>
 
      <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
+        <Typography variant="h4" gutterBottom>
+        Hello  👋 {counter}  this is what you looking for,
+      </Typography>
           <Typography component="h5" variant="h5" fontWeight={500}>
             {details.full_name}
           </Typography>
@@ -123,6 +153,12 @@ function Details() {
         <Button  href={details.html_url} size="small" color="primary" >
                Go to repository
             </Button>
+            <Link to='/'>
+            <Button  size="small" color="primary" >
+               back to home
+            </Button>
+            </Link>
+            
             
         
         </div>
